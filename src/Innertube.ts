@@ -46,7 +46,7 @@ import type Format from './parser/classes/misc/Format.js';
 
 export type InnertubeConfig = SessionOptions;
 
-export type InnerTubeClient = 'WEB' | 'iOS' | 'ANDROID' | 'YTMUSIC_ANDROID' | 'YTMUSIC' | 'YTSTUDIO_ANDROID' | 'TV_EMBEDDED' | 'YTKIDS';
+export type InnerTubeClient = 'IOS' | 'WEB' | 'ANDROID' | 'YTMUSIC' | 'YTMUSIC_ANDROID' | 'YTSTUDIO_ANDROID' | 'TV_EMBEDDED' | 'YTKIDS';
 
 export type SearchFilters = Partial<{
   upload_date: 'all' | 'hour' | 'today' | 'week' | 'month' | 'year';
@@ -97,7 +97,8 @@ export default class Innertube {
       video_id: next_payload.videoId,
       playlist_id: next_payload?.playlistId,
       client: client,
-      sts: this.#session.player?.sts
+      sts: this.#session.player?.sts,
+      po_token: this.#session.po_token
     });
 
     const player_response = this.actions.execute(PlayerEndpoint.PATH, player_payload);
@@ -116,7 +117,8 @@ export default class Innertube {
       PlayerEndpoint.PATH, PlayerEndpoint.build({
         video_id: video_id,
         client: client,
-        sts: this.#session.player?.sts
+        sts: this.#session.player?.sts,
+        po_token: this.#session.po_token
       })
     );
 
